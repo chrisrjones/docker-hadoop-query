@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#IP=`ip addr show eth0 | grep 'inet ' | cut -d/ -f1 | awk '{print $2}'`
-#sed -i "s/@IP@/$IP/g" /opt/hbase/conf/hbase-site.xml
-
 echo "STARTING HBASE..."
 (
 
@@ -13,6 +10,7 @@ $HBASE_HOME/bin/hbase master start
 sleep 5
 
 echo "STARTING HIVE..."
-$HIVE_HOME/bin/hiveserver2
+cd /opt/hive o
+$HIVE_HOME/bin/hive --service hiveserver2 --hiveconf hive.aux.jars.path=lib/hive-hbase-handler-1.2.1.jar,auxlib/hbase-protocol-1.1.2.jar,lib/zookeeper-3.4.6.jar,auxlib/hbase-common-1.1.2.jar,./lib/guava-14.0.1.jar,auxlib/hbase-server-1.1.2.jar,auxlib/hbase-client-1.1.2.jar,auxlib/htrace-core-3.1.0-incubating.jar,auxlib/netty-all-4.0.23.Final.jar,auxlib/hbase-hadoop-compat-1.1.2.jar,auxlib/metrics-core-2.2.0.jar --hiveconf hive.metastore.warehouse.dir=/tmp/hivewarehouse
 
 )

@@ -52,11 +52,26 @@ RUN \
 	rm -f /opt/downloads/hadoop-$HADOOP_VERSION.tar.gz && \
 	mv /opt/hadoop-$HADOOP_VERSION /opt/hadoop
 
-
 ENV HBASE_HOME /opt/hbase
 ENV HIVE_HOME /opt/hive
 ENV HADOOP_HOME /opt/hadoop
 ENV PATH /opt:/opt/hbase/bin:/opt/hive/bin:/opt/hadoop/bin:$PATH
+
+RUN \
+	
+	# support hive queries over hbase
+	mkdir $HIVE_HOME/auxlib && \
+	ln -s $HBASE_HOME/lib/hbase-client-1.1.2.jar $HIVE_HOME/auxlib && \
+	ln -s $HBASE_HOME/lib/hbase-hadoop-compat-1.1.2.jar $HIVE_HOME/auxlib && \
+	ln -s $HBASE_HOME/lib/hbase-server-1.1.2.jar $HIVE_HOME/auxlib && \
+	ln -s $HBASE_HOME/lib/htrace-core-3.1.0-incubating.jar $HIVE_HOME/auxlib && \
+	ln -s $HBASE_HOME/lib/netty-all-4.0.23.Final.jar $HIVE_HOME/auxlib && \
+	ln -s $HBASE_HOME/lib/guava-12.0.1.jar $HIVE_HOME/auxlib && \
+	ln -s $HBASE_HOME/lib/hbase-common-1.1.2.jar $HIVE_HOME/auxlib && \
+	ln -s $HBASE_HOME/lib/hbase-protocol-1.1.2.jar $HIVE_HOME/auxlib && \
+	ln -s $HBASE_HOME/lib/metrics-core-2.2.0.jar $HIVE_HOME/auxlib && \
+	ln -s $HBASE_HOME/lib/zookeeper-3.4.6.jar $HIVE_HOME/auxlib
+
 
 ADD ./hbase-site.xml /opt/hbase/conf/hbase-site.xml
 ADD ./docker-init /opt/docker-init
