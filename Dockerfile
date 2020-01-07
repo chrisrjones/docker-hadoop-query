@@ -6,7 +6,7 @@ FROM anapsix/docker-oracle-java8
 ENV DEBIAN_FRONTEND noninteractive
 ENV HBASE_VERSION 1.1.2
 ENV HIVE_VERSION 1.2.1
-ENV HADOOP_VERSION 2.6.3
+ENV HADOOP_VERSION 2.7.3
 
 #RUN echo 'hosts: files mdns4_minimal [NOTFOUND=return] dns mdns4' >> /etc/nsswitch.conf
 
